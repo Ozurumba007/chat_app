@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
                 // logo
@@ -55,6 +56,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
                 // sign in button
                 MyButton(onTap: () {}, text: 'Sign In'),
+
+                const SizedBox(height: 50),
+                // don't have an account? register now
+                Row(
+                  children: [
+                    Text('Don\'t have an account?'),
+                    const SizedBox(width: 4),
+                    Text('Register now'),
+                  ],
+                )
               ],
             ),
           ),
