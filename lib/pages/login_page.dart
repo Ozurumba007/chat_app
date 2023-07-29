@@ -10,6 +10,27 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              // logo
+              Icon(
+                Icons.message,
+                size: 80,
+              ),
+              // welcome back text
+              Text(
+                'Welcome back',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
