@@ -24,11 +24,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
                 // logo
                 Icon(
                   Icons.message,
-                  size: 80,
+                  size: 100,
                   color: Colors.grey[800],
                 ),
                 const SizedBox(height: 25),
@@ -59,11 +59,17 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 50),
                 // don't have an account? register now
-                Row(
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Don\'t have an account?'),
-                    const SizedBox(width: 4),
-                    Text('Register now'),
+                    SizedBox(width: 4),
+                    Text(
+                      'Register now',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 )
               ],
