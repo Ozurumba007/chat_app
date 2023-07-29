@@ -4,7 +4,11 @@ import '../components/my_button.dart';
 import '../components/my_text_field.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final void Function()? onTap;
+  const RegisterPage({
+    super.key,
+    this.onTap,
+  });
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -15,6 +19,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  //sign up user
+  void signUp() {}
 
   @override
   Widget build(BuildContext context) {
@@ -75,21 +82,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 25),
 
                 // sign in button
-                MyButton(onTap: () {}, text: 'Sign In'),
+                MyButton(onTap: signUp, text: 'Sign In'),
 
                 const SizedBox(height: 50),
 
                 // don't have an account? register now
 
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Don\'t have an account?'),
-                    SizedBox(width: 4),
-                    Text(
-                      'Register now',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    const Text('Already have an account?'),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        'Login now',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
