@@ -1,3 +1,4 @@
+import 'package:chat_app/components/my_button.dart';
 import 'package:chat_app/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,9 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Password',
                   obscureText: true,
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
+                // sign in button
+                MyButton(onTap: () {}, text: 'Sign In'),
               ],
             ),
           ),
