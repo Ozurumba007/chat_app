@@ -1,6 +1,6 @@
 # chat_app
 
-A new Flutter project.
+An application for communicating with your family and friend through text messages alone
 
 ## Getting Started
 
