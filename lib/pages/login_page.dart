@@ -29,61 +29,63 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 25),
-                // logo
-                Icon(
-                  Icons.message,
-                  size: 100,
-                  color: Colors.grey[800],
-                ),
-                const SizedBox(height: 25),
-                // welcome back text
-                const Text(
-                  'Welcome back you\'ve been missed',
-                  style: TextStyle(
-                    fontSize: 16,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 25),
+                  // logo
+                  Icon(
+                    Icons.message,
+                    size: 100,
+                    color: Colors.grey[800],
                   ),
-                ),
-                const SizedBox(height: 25),
-                // email textfield
-                MyTextField(
-                  controller: emailController,
-                  hintText: 'Email',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 10),
-                // password textfield
-                MyTextField(
-                  controller: passwordController,
-                  hintText: 'Password',
-                  obscureText: true,
-                ),
-                const SizedBox(height: 25),
-                // sign in button
-                MyButton(onTap: () {}, text: 'Sign In'),
+                  const SizedBox(height: 25),
+                  // welcome back text
+                  const Text(
+                    'Welcome back you\'ve been missed',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  // email textfield
+                  MyTextField(
+                    controller: emailController,
+                    hintText: 'Email',
+                    obscureText: false,
+                  ),
+                  const SizedBox(height: 10),
+                  // password textfield
+                  MyTextField(
+                    controller: passwordController,
+                    hintText: 'Password',
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 25),
+                  // sign in button
+                  MyButton(onTap: () {}, text: 'Sign In'),
 
-                const SizedBox(height: 50),
-                // don't have an account? register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Don\'t have an account?'),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: widget.onTap,
-                      child: const Text(
-                        'Register now',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                  const SizedBox(height: 50),
+                  // don't have an account? register now
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Don\'t have an account?'),
+                      const SizedBox(width: 4),
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: const Text(
+                          'Register now',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
