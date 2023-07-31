@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +60,25 @@ class _ChatPageState extends State<ChatPage> {
   // build message list
 
   // build message item
+  Widget _buildMessageItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+    // align the message to the right if the sender is the current user, otherwise to the left
+
+    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
+
+    return Container(
+      alignment: alignment,
+      child: Column(
+        children: [
+          Text(data['senderEmail']),
+          Text(data['Message']),
+        ],
+      ),
+    );
+  }
 
   // build message input
   Widget _buildMessageInput() {
