@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[500],
       appBar: AppBar(
         title: Text('Home Page'),
         actions: [
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         ],
+        backgroundColor: Colors.grey[900],
       ),
       body: _buildUserList(),
     );
@@ -74,12 +76,21 @@ class _HomePageState extends State<HomePage> {
     // display alll users except current user
 
     if (_auth.currentUser!.email != data['email']) {
-      return ListTile(
-        title: Text(data['email']),
-        onTap: () => Get.to(
-          () => ChatPage(
-            receiverUserEmail: data['email'],
-            receiverUserID: data['uid'],
+      return Container(
+        color: Colors.grey,
+        padding: EdgeInsets.all(10),
+        child: ListTile(
+          leading: Icon(Icons.person),
+          title: Text(
+            data['email'],
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+          ),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () => Get.to(
+            () => ChatPage(
+              receiverUserEmail: data['email'],
+              receiverUserID: data['uid'],
+            ),
           ),
         ),
       );

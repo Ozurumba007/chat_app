@@ -38,21 +38,29 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[400],
       appBar: AppBar(
         title: Text(
           widget.receiverUserEmail,
         ),
+        backgroundColor: Colors.grey[900],
       ),
-      body: Column(
-        children: [
-          // messages
-          Expanded(
-            child: _buildMessageList(),
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            // messages
+            Expanded(
+              child: _buildMessageList(),
+            ),
 
-          // user input
-          _buildMessageInput(),
-        ],
+            // user input
+            _buildMessageInput(),
+
+            const SizedBox(height: 25),
+          ],
+        ),
       ),
     );
   }
@@ -93,9 +101,31 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       alignment: alignment,
       child: Column(
+        crossAxisAlignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
+        mainAxisAlignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
           Text(data['senderEmail']),
-          Text(data['Message']),
+          // ChatBubble(message: data['message']),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? Colors.green[400]
+                  : Colors.grey[600],
+            ),
+            child: Text(
+              data['message'],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -118,7 +148,7 @@ class _ChatPageState extends State<ChatPage> {
         IconButton(
           onPressed: sendMessage,
           icon: const Icon(
-            Icons.send,
+            Icons.arrow_upward,
             size: 40,
           ),
         ),
