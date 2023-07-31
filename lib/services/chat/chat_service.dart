@@ -41,4 +41,18 @@ class ChatService extends ChangeNotifier {
   }
 
   // Get Messages
+  Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
+    // construct chat room id from users ids (sorted to ensure it matches the id used when sending a message)
+
+    List<String> ids = [userId, otherUserId];
+    ids.sort();
+    String chatRoomId = ids.join("_");
+
+    return _fireStore
+        .collection('chat_room')
+        .doc(chatRoomId)
+        .collection('message')
+        .orderBy('timestamp', descending: false)
+        .snapshots();
+  }
 }
