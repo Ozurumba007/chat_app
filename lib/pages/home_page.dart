@@ -75,15 +75,13 @@ class _HomePageState extends State<HomePage> {
 
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-        title: data['email'],
-        onTap: () {
-          Get.to(
-            ChatPage(
-              receiverUserEmail: data['email'],
-              receiverUserID: data['uid'],
-            ),
-          );
-        },
+        title: Text(data['email']),
+        onTap: () => Get.to(
+          () => ChatPage(
+            receiverUserEmail: data['email'],
+            receiverUserID: data['uid'],
+          ),
+        ),
       );
     } else {
       // return empty container
