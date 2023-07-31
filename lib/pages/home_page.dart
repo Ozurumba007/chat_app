@@ -1,7 +1,9 @@
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // build a list of users except for the current logged in user
-  Widget _buildUserList(DocumentSnapshot document) {
+  Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // build individual user list items
-  Widget _buildUSerListItem(DocumentSnapshot document) {
+  Widget _buildUserListItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     // display alll users except current user
@@ -74,8 +76,18 @@ class _HomePageState extends State<HomePage> {
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
         title: data['email'],
-        onTap: () {},
+        onTap: () {
+          Get.to(
+            ChatPage(
+              receiverUserEmail: data['email'],
+              receiverUserID: data['uid'],
+            ),
+          );
+        },
       );
+    } else {
+      // return empty container
+      return Container();
     }
   }
 }
