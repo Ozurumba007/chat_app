@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/message.dart';
+
 class ChatService extends ChangeNotifier {
   // get instance of auth and firestore
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -15,10 +17,27 @@ class ChatService extends ChangeNotifier {
     final Timestamp timestamp = Timestamp.now();
 
     // create a new message
+    Message newMessage = Message(
+      senderId: currentUserId,
+      senderEmail: currentUserEmail,
+      receiverId: receiverId,
+      message: message,
+      timestamp: timestamp,
+    );
 
     // construct chat room id from current user id and receiver id
+    List<String> ids = [currentUserId, receiverId];
+    ids.sort(); // sort the ids ( this ensures the chat room id is always the same for any pair of people)
+
+    String chatRoomId = ids
+        .join("_"); // combine the ids into single string to use as a chatroomID
 
     // add new message to database
+    await _fireStore
+        .collection('chat_rooms')
+        .doc(chatRoomId)
+        .collection('message')
+        .add(newMessage.toMap());
   }
 
   // Get Messages
