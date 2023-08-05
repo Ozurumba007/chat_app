@@ -24,7 +24,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
   //sign up user
   void signUp() async {
+    // loading indicator
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     if (passwordController.text != confirmPasswordController.text) {
+      // pop loading circle
+      Navigator.pop(context);
+      // show error to user
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Passwords do not match!'),
@@ -41,7 +51,10 @@ class _RegisterPageState extends State<RegisterPage> {
         emailController.text,
         passwordController.text,
       );
+      if (context.mounted) Navigator.pop(context);
     } catch (e) {
+      // pop loading circle
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

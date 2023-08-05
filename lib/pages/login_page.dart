@@ -24,13 +24,23 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> signIn() async {
     // get the auth service
     final authService = Provider.of<AuthService>(context, listen: false);
+    // show  loadin circle
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
 
     try {
       await authService.signInEmailandPassword(
         emailController.text,
         passwordController.text,
       );
+      // pop loading circle
+      if (context.mounted) Navigator.pop(context);
     } catch (e) {
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
