@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.pop(context);
       // show error to user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Passwords do not match!'),
         ),
       );
@@ -51,10 +51,11 @@ class _RegisterPageState extends State<RegisterPage> {
         emailController.text,
         passwordController.text,
       );
-      if (context.mounted) Navigator.pop(context);
+      if (context.mounted) Navigator.of(context, rootNavigator: true).pop();
     } catch (e) {
       // pop loading circle
       Navigator.pop(context);
+      // error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
